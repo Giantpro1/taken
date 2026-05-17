@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAKEN — Web3 Signal Architect</title>
+  <meta name="description" content="TAKEN — The penguin explorer navigating the frozen digital frontier. Web3 influencer, signal architect, culture curator.">
+
+  <!-- Google Fonts: closest available to Clash Display + Neue Montreal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Noise overlay -->
+  <div id="noise" aria-hidden="true"></div>
+
+  <!-- Scroll progress -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Atmospheric particles canvas -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LOADER
+  ═══════════════════════════════════════════════════════════════ -->
+  <div id="loader" role="progressbar" aria-label="Loading">
+    <div class="loader-sigil">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="40" cy="40" r="36" stroke="rgba(126,244,244,0.15)" stroke-width="1"/>
+        <circle class="ring" cx="40" cy="40" r="36"
+          stroke="url(#ring-grad)" stroke-width="1"
+          stroke-dasharray="48 178" stroke-linecap="round"/>
+        <!-- Inner ring -->
+        <circle cx="40" cy="40" r="24" stroke="rgba(126,244,244,0.08)" stroke-width="1"/>
+        <circle class="ring-2" cx="40" cy="40" r="24"
+          stroke="rgba(126,244,244,0.4)" stroke-width="1"
+          stroke-dasharray="20 131" stroke-linecap="round"/>
+        <!-- Penguin silhouette center -->
+        <text x="40" y="48" text-anchor="middle" font-size="22" fill="rgba(126,244,244,0.9)">🐧</text>
+        <defs>
+          <linearGradient id="ring-grad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#7ef4f4"/>
+            <stop offset="100%" stop-color="#6b4fa0"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="loader-wordmark">TAKEN</div>
+    <div class="loader-status" id="loader-status">Initializing signal...</div>
+    <div class="loader-bar-track">
+      <div class="loader-bar-fill" id="loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════════════════ -->
+  <nav id="nav" aria-label="Main navigation">
+    <a href="#hero" class="nav-logo">T<span>A</span>KEN</a>
+    <ul class="nav-links">
+      <li><a href="#lore">Lore</a></li>
+      <li><a href="#dashboard">Signal</a></li>
+      <li><a href="#content-wall">Archive</a></li>
+      <li><a href="#brand-ecosystem">Ecosystem</a></li>
+      <li><a href="#case-studies">Case Studies</a></li>
+    </ul>
+    <a href="https://x.com/T_A_K_E_N_1" target="_blank" rel="noopener" class="nav-cta">
+      Follow the Signal
+    </a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 1: HERO — THE SIGNAL (Video 1)
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="hero" class="cinematic-section">
+    <video class="video-bg" autoplay muted loop playsinline preload="auto"
+      aria-hidden="true">
+      <source src="assets/videos/scene1-signal.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay" aria-hidden="true"></div>
+    <div class="video-overlay-side" aria-hidden="true"></div>
+    <div class="holo-scan" aria-hidden="true"></div>
+
+    <div class="section-ui">
+      <div class="hero-eyebrow" id="hero-eyebrow">
+        Web3 Signal Architect
+      </div>
+      <h1 class="hero-headline" id="hero-headline">
+        The<br>
+        <em>Penguin</em><br>
+        <span class="outline-text">Explorer</span>
+      </h1>
+      <p class="hero-sub" id="hero-sub">
+        Navigating the frozen digital frontier. Where Web3 culture converges, influence
+        compounds, and signals move markets — TAKEN is already there.
+      </p>
+      <div class="hero-actions" id="hero-actions">
+        <a href="#dashboard" class="btn-primary">View the Signal</a>
+        <a href="#lore" class="btn-ghost">Enter the Lore</a>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="hero-stats" id="hero-stats" aria-label="Key statistics">
+      <div class="hero-stat">
+        <div class="stat-value" data-count="48">0<span>K+</span></div>
+        <div class="stat-label">Followers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-value" data-count="12">0<span>M+</span></div>
+        <div class="stat-label">Impressions / Mo</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-value" data-count="3.8">0<span>%</span></div>
+        <div class="stat-label">Engagement Rate</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-value" data-count="200">0<span>+</span></div>
+        <div class="stat-label">Campaigns</div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 2: LORE / IDENTITY
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="lore" aria-labelledby="lore-heading">
+    <div class="lore-bg-glow" aria-hidden="true"></div>
+    <div style="max-width: 1400px; margin: 0 auto; padding: 140px 5vw;">
+
+      <div class="lore-grid">
+        <!-- Penguin mascot -->
+        <div class="penguin-card section-fade" id="lore-card">
+          <div class="penguin-card-glow" aria-hidden="true"></div>
+          <div class="penguin-card-scanlines" aria-hidden="true"></div>
+          <div class="penguin-emoji" aria-label="Penguin explorer mascot">🐧</div>
+          <div class="penguin-card-tag" aria-hidden="true">
+            <span>SIGNAL: ACTIVE</span>
+            <span>@T_A_K_E_N_1</span>
+          </div>
+        </div>
+
+        <!-- Identity text -->
+        <div class="lore-text-col">
+          <div class="section-label section-fade" data-index="01">Identity Protocol</div>
+          <h2 class="lore-headline section-fade" id="lore-heading">
+            Born from the<br>
+            <em>frozen edge</em><br>
+            of the feed
+          </h2>
+          <p class="lore-body section-fade">
+            TAKEN isn't just an influencer. He's a navigator — a signal-layer between
+            emerging Web3 protocols and the communities that will carry them. Operating
+            where most are still arriving.
+          </p>
+          <p class="lore-body section-fade">
+            The penguin motif is no accident. Arctic creatures don't panic in the cold —
+            they thrive in it. In the volatile freeze of crypto winters, TAKEN keeps moving,
+            keeps broadcasting, keeps building trust.
+          </p>
+          <blockquote class="lore-quote section-fade">
+            "I don't just follow the narrative —<br>I help architect it."
+          </blockquote>
+
+          <div class="identity-tags section-fade">
+            <span class="id-tag">Web3 Native</span>
+            <span class="id-tag">Alpha Caller</span>
+            <span class="id-tag accent">Trend Architect</span>
+            <span class="id-tag">Community Builder</span>
+            <span class="id-tag">Campaign Strategist</span>
+            <span class="id-tag">Signal Amplifier</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 3: INFLUENCE DASHBOARD
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="dashboard" aria-labelledby="dashboard-heading">
+    <div class="dashboard-bg" aria-hidden="true"></div>
+    <div style="padding: 140px 5vw;">
+
+      <div class="dashboard-header section-fade">
+        <div class="section-label" style="justify-content:center" data-index="02">Signal Output</div>
+        <h2 class="dash-headline" id="dashboard-heading">
+          Influence<br><em style="font-style:italic;color:var(--cyan)">Measured</em>
+        </h2>
+        <p class="dash-sub">
+          Every post is a signal. Every signal moves culture. Here's what the data
+          says about TAKEN's reach across the Web3 ecosystem.
+        </p>
+      </div>
+
+      <div class="metrics-grid" id="metrics-grid">
+
+        <!-- Row 1 -->
+        <div class="metric-card section-fade">
+          <div class="holo-scan" aria-hidden="true"></div>
+          <div class="metric-label">Monthly Impressions</div>
+          <div class="metric-value">12<span class="unit">M+</span></div>
+          <div class="metric-delta">+34% MoM growth</div>
+          <div class="metric-bar"><div class="metric-bar-fill" data-width="82"></div></div>
+        </div>
+
+        <div class="metric-card section-fade">
+          <div class="metric-label">Engagement Rate</div>
+          <div class="metric-value">3.8<span class="unit">%</span></div>
+          <div class="metric-delta">3× industry avg</div>
+          <div class="metric-bar"><div class="metric-bar-fill" data-width="76"></div></div>
+        </div>
+
+        <div class="metric-card section-fade">
+          <div class="metric-label">Follower Count</div>
+          <div class="metric-value">48<span class="unit">K</span></div>
+          <div class="metric-delta">+1.2K this month</div>
+          <div class="metric-bar"><div class="metric-bar-fill" data-width="68"></div></div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="metric-card wide section-fade">
+          <div class="metric-label">Campaigns Delivered</div>
+          <div class="metric-value">200<span class="unit">+</span></div>
+          <p class="metric-desc">
+            From DeFi protocol launches to NFT collections and L2 ecosystem expansions —
+            each campaign is architected for community resonance, not just visibility.
+          </p>
+          <div class="sparkline-wrap" aria-hidden="true">
+            <svg viewBox="0 0 400 60" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="spark-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgba(126,244,244,0.3)"/>
+                  <stop offset="100%" stop-color="rgba(126,244,244,0)"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,55 L28,50 L56,42 L84,38 L112,45 L140,32 L168,28 L196,22 L224,30 L252,18 L280,12 L308,20 L336,10 L364,15 L392,8 L400,5"
+                stroke="rgba(126,244,244,0.6)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M0,55 L28,50 L56,42 L84,38 L112,45 L140,32 L168,28 L196,22 L224,30 L252,18 L280,12 L308,20 L336,10 L364,15 L392,8 L400,5 L400,60 L0,60 Z"
+                fill="url(#spark-grad)"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="metric-card section-fade">
+          <div class="metric-label">Avg Tweet Reach</div>
+          <div class="metric-value">85<span class="unit">K</span></div>
+          <div class="metric-delta">per post</div>
+          <div class="metric-bar"><div class="metric-bar-fill" data-width="71"></div></div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="metric-card section-fade">
+          <div class="metric-label">Link Click-Through</div>
+          <div class="metric-value">6.2<span class="unit">%</span></div>
+          <div class="metric-delta">CTR on sponsored</div>
+          <div class="metric-bar"><div class="metric-bar-fill" data-width="62"></div></div>
+        </div>
+
+        <div class="metric-card section-fade">
+          <div class="metric-label">Audience in Web3</div>
+          <div class="metric-value">91<span class="unit">%</span></div>
+          <div class="metric-delta">verified on-chain</div>
+          <div class="metric-bar"><div class="metric-bar-fill" data-width="91"></div></div>
+        </div>
+
+        <div class="metric-card section-fade">
+          <div class="metric-label">Content Formats</div>
+          <div class="metric-value">8<span class="unit">+</span></div>
+          <p class="metric-desc" style="margin-top: 16px; font-size: .78rem;">
+            Threads · Alpha Drops · Long-form · Spaces · Memes · Campaigns · Spaces · Reacts
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       ARCHIVE VIDEO BREAK — THE ARCHIVE (Video 2)
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="archive" class="cinematic-section" aria-label="The Archive — cinematic interlude">
+    <!-- Scene 2: Archive — lazy loaded, paused until visible -->
+    <video class="video-bg" muted loop playsinline preload="none"
+      data-lazy-video
+      aria-hidden="true">
+      <source src="assets/videos/scene2-archive.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay" aria-hidden="true"></div>
+    <div class="holo-scan" aria-hidden="true"></div>
+
+    <div class="section-ui" style="text-align:center;">
+      <div class="section-label section-fade" data-index="03" style="justify-content:center;">
+        Scene II — The Archive
+      </div>
+      <h2 class="dash-headline section-fade" style="font-family: var(--f-display); font-size: clamp(2rem, 5vw, 5rem); font-weight: 300;">
+        Every campaign.<br>
+        <em style="font-style:italic;color:var(--cyan)">Frozen in time.</em>
+      </h2>
+      <p class="section-fade" style="max-width: 520px; margin: 24px auto 0; color: var(--white-dim); font-size: .95rem; line-height: 1.8;">
+        Deep inside the archive, every collab, every thread, every signal that moved
+        a community — catalogued, crystalline, permanent.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 5: CONTENT WALL
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="content-wall" aria-labelledby="content-heading">
+    <div class="content-wall-bg" aria-hidden="true"></div>
+    <div style="padding: 140px 5vw;">
+      <div style="max-width: 1400px; margin: 0 auto;">
+
+        <div class="section-fade" style="margin-bottom: 60px;">
+          <div class="section-label" data-index="04">Content Signals</div>
+          <h2 id="content-heading" style="font-family: var(--f-display); font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 300; line-height: 1.05; letter-spacing: -.02em;">
+            The <em style="font-style:italic;color:var(--cyan)">Wall</em><br>of Signal
+          </h2>
+        </div>
+
+        <div class="wall-grid">
+
+          <!-- Featured large -->
+          <article class="wall-item large featured section-fade">
+            <div class="wall-item-inner">
+              <div>
+                <div class="wall-type">Alpha Thread</div>
+                <h3 class="wall-title">
+                  "The 5 protocols that will define the next cycle — and why most of CT is sleeping on them"
+                </h3>
+                <p style="font-size:.8rem; color:var(--white-dim); margin-top: 16px; line-height: 1.7;">
+                  A 12-part thread that surfaced under-the-radar L2 infrastructure projects
+                  six months before their mainnet launches. 2.1M impressions in 48 hours.
+                </p>
+              </div>
+              <div>
+                <div class="wall-engagement">
+                  <div class="eng-metric">2.1M <span>views</span></div>
+                  <div class="eng-metric">18.4K <span>retweets</span></div>
+                  <div class="eng-metric">42K <span>likes</span></div>
+                </div>
+                <div class="wall-meta">March 2024 · Organic · #Web3 #DeFi</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Medium cards -->
+          <article class="wall-item medium section-fade">
+            <div class="wall-item-inner">
+              <div class="wall-type">Campaign</div>
+              <h3 class="wall-title">Protocol X Launch — Series A Awareness</h3>
+              <div class="wall-engagement">
+                <div class="eng-metric">890K <span>reach</span></div>
+                <div class="eng-metric">5.1% <span>CTR</span></div>
+              </div>
+              <div class="wall-meta">Sponsored · DeFi</div>
+            </div>
+          </article>
+
+          <article class="wall-item small featured-purple section-fade">
+            <div class="wall-item-inner">
+              <div class="wall-type">Space</div>
+              <h3 class="wall-title">Aurora Spaces: NFT Future</h3>
+              <div class="wall-meta">4,200 live listeners</div>
+            </div>
+          </article>
+
+          <!-- Narrow tall -->
+          <article class="wall-item narrow section-fade">
+            <div class="wall-item-inner">
+              <div class="wall-type">Opinion</div>
+              <h3 class="wall-title">Why the penguin always survives the bear market</h3>
+              <p style="font-size:.78rem; color:var(--white-dim); margin-top: 12px; line-height:1.7; flex:1;">
+                A post about resilience in crypto that became TAKEN's most-shared essay piece — 
+                with community newsletters picking it up organically.
+              </p>
+              <div class="wall-engagement" style="margin-top: 20px;">
+                <div class="eng-metric">340K <span>views</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Wide -->
+          <article class="wall-item wide section-fade">
+            <div class="wall-item-inner" style="flex-direction:row; align-items: center; gap: 40px; min-height: 0; padding: 28px 36px;">
+              <div style="flex: 1;">
+                <div class="wall-type">Community Signal</div>
+                <h3 class="wall-title" style="font-size: 1.2rem;">AMA with Devs — Decentralised Exchange Architecture</h3>
+              </div>
+              <div style="display:flex; gap:24px; flex-shrink:0;">
+                <div class="eng-metric" style="text-align:center;">
+                  <div style="font-family:var(--f-display);font-size:1.8rem;color:var(--cyan);">6.8K</div>
+                  <div style="font-size:.55rem;letter-spacing:.15em;color:var(--white-dim);margin-top:4px;">PARTICIPANTS</div>
+                </div>
+                <div class="eng-metric" style="text-align:center;">
+                  <div style="font-family:var(--f-display);font-size:1.8rem;color:var(--cyan);">98%</div>
+                  <div style="font-size:.55rem;letter-spacing:.15em;color:var(--white-dim);margin-top:4px;">SATISFACTION</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="wall-item medium section-fade">
+            <div class="wall-item-inner">
+              <div class="wall-type">Market Read</div>
+              <h3 class="wall-title">BTC Sentiment Analysis — Pre-Halving</h3>
+              <div class="wall-engagement">
+                <div class="eng-metric">1.2M <span>reach</span></div>
+                <div class="eng-metric">22K <span>saves</span></div>
+              </div>
+              <div class="wall-meta">Feb 2024 · Organic</div>
+            </div>
+          </article>
+
+          <article class="wall-item small section-fade">
+            <div class="wall-item-inner">
+              <div class="wall-type">Meme Signal</div>
+              <h3 class="wall-title">Penguin in the Blizzard 🐧</h3>
+              <div class="wall-meta">500K views</div>
+            </div>
+          </article>
+
+          <!-- Full-width -->
+          <article class="wall-item full featured section-fade">
+            <div class="wall-item-inner" style="flex-direction:row; align-items:center; gap: 60px; min-height: 0; padding: 36px 48px;">
+              <div style="font-size: 3rem; filter: drop-shadow(0 0 20px rgba(126,244,244,0.4));">🐧</div>
+              <div style="flex: 1;">
+                <div class="wall-type">Signature Piece</div>
+                <h3 class="wall-title" style="font-size: clamp(1.2rem, 2.5vw, 2rem);">
+                  "The Frozen Frontier" — TAKEN's manifesto on building identity in Web3
+                </h3>
+              </div>
+              <div style="font-family:var(--f-display);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--cyan);flex-shrink:0;">
+                3.4M<br><span style="font-size:.4em;font-family:var(--f-mono);letter-spacing:.15em;color:var(--white-dim);">IMPRESSIONS</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 6: BRAND ECOSYSTEM
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="brand-ecosystem" aria-labelledby="ecosystem-heading">
+    <div class="ecosystem-bg" aria-hidden="true"></div>
+    <div style="max-width: 1400px; margin: 0 auto; padding: 140px 5vw;">
+
+      <div class="ecosystem-header">
+        <div class="section-label section-fade" data-index="05">Ecosystem</div>
+        <h2 class="lore-headline section-fade" id="ecosystem-heading">
+          The brands that<br>
+          <em>trust the signal</em>
+        </h2>
+        <p class="lore-body section-fade" style="max-width: 500px;">
+          From emerging protocols to established blockchain ecosystems — TAKEN partners
+          with projects that have something real to say.
+        </p>
+      </div>
+
+      <div class="ecosystem-grid">
+
+        <div class="partner-card section-fade">
+          <div class="card-glow" aria-hidden="true"></div>
+          <span class="partner-icon">⛓️</span>
+          <div class="partner-name">DeFi Protocol</div>
+          <div class="partner-role">Launch Campaign</div>
+          <p class="partner-desc">Series A announcement driving 40K new wallet activations in 72 hours.</p>
+        </div>
+
+        <div class="partner-card section-fade">
+          <div class="card-glow" aria-hidden="true"></div>
+          <span class="partner-icon">🌐</span>
+          <div class="partner-name">Layer 2 Network</div>
+          <div class="partner-role">Ecosystem Awareness</div>
+          <p class="partner-desc">Sustained 6-week campaign establishing brand voice across CT.</p>
+        </div>
+
+        <div class="partner-card section-fade">
+          <div class="card-glow" aria-hidden="true"></div>
+          <span class="partner-icon">🖼️</span>
+          <div class="partner-name">NFT Collection</div>
+          <div class="partner-role">Mint Launch</div>
+          <p class="partner-desc">Sold out in under 4 minutes. TAKEN's community trusted the call.</p>
+        </div>
+
+        <div class="partner-card section-fade">
+          <div class="card-glow" aria-hidden="true"></div>
+          <span class="partner-icon">🔐</span>
+          <div class="partner-name">Web3 Infrastructure</div>
+          <div class="partner-role">Education Campaign</div>
+          <p class="partner-desc">Technical deep-dives that turned complex concepts into community conviction.</p>
+        </div>
+
+        <div class="partner-card section-fade">
+          <div class="card-glow" aria-hidden="true"></div>
+          <span class="partner-icon">📊</span>
+          <div class="partner-name">Analytics DAO</div>
+          <div class="partner-role">Thought Leadership</div>
+          <p class="partner-desc">Monthly signal reports amplified to TAKEN's audience of verified DeFi wallets.</p>
+        </div>
+
+        <div class="partner-card section-fade">
+          <div class="card-glow" aria-hidden="true"></div>
+          <span class="partner-icon">🪙</span>
+          <div class="partner-name">GameFi Studio</div>
+          <div class="partner-role">Community Activation</div>
+          <p class="partner-desc">Guild recruitment campaign that built a 12K player community in 30 days.</p>
+        </div>
+
+        <div class="partner-card section-fade">
+          <div class="card-glow" aria-hidden="true"></div>
+          <span class="partner-icon">🤝</span>
+          <div class="partner-name">Cross-Chain Bridge</div>
+          <div class="partner-role">Adoption Drive</div>
+          <p class="partner-desc">Bridged the technical with the accessible — 8K new bridge users in week one.</p>
+        </div>
+
+        <div class="partner-card section-fade" style="background: linear-gradient(135deg, var(--navy-mid), rgba(224,64,160,0.06)); border-color: rgba(224,64,160,0.12);">
+          <div class="card-glow" aria-hidden="true"></div>
+          <span class="partner-icon">✦</span>
+          <div class="partner-name" style="color: var(--magenta);">Your Project</div>
+          <div class="partner-role" style="color: var(--magenta);">Next Signal</div>
+          <p class="partner-desc">The frontier is open. TAKEN is selective — and when he signals, communities follow.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 7: CASE STUDIES
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="case-studies" aria-labelledby="cs-heading">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 140px 5vw;">
+
+      <div style="margin-bottom: 80px;" class="section-fade">
+        <div class="section-label" data-index="06">Case Studies</div>
+        <h2 id="cs-heading" style="font-family: var(--f-display); font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 300; line-height: 1.05; letter-spacing: -.02em;">
+          Signal in<br>
+          <em style="font-style:italic;color:var(--cyan)">Action</em>
+        </h2>
+      </div>
+
+      <div class="cs-grid">
+
+        <article class="cs-card section-fade">
+          <div class="cs-number" aria-hidden="true">01</div>
+          <div class="cs-category">DeFi Launch · Organic Campaign</div>
+          <div class="cs-divider" aria-hidden="true"></div>
+          <h3 class="cs-title">From whitepaper to 100K community in 60 days</h3>
+          <p class="cs-desc">
+            A new yield protocol needed credibility, fast. TAKEN embedded with the team,
+            understood the architecture, then released a 3-part thread series that positioned
+            the protocol as a legitimate long-term play — not another farm-and-dump.
+            The community responded.
+          </p>
+          <div class="cs-results">
+            <div class="cs-result-item">
+              <div class="cs-result-value">2.8M</div>
+              <div class="cs-result-label">Impressions</div>
+            </div>
+            <div class="cs-result-item">
+              <div class="cs-result-value">+18K</div>
+              <div class="cs-result-label">Discord joins</div>
+            </div>
+            <div class="cs-result-item">
+              <div class="cs-result-value">340%</div>
+              <div class="cs-result-label">TVL increase</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="cs-card section-fade">
+          <div class="cs-number" aria-hidden="true">02</div>
+          <div class="cs-category">NFT Collection · Mint Campaign</div>
+          <div class="cs-divider" aria-hidden="true"></div>
+          <h3 class="cs-title">The collection CT didn't see coming — until TAKEN signaled</h3>
+          <p class="cs-desc">
+            An art-heavy PFP collection with strong lore but no marketing traction. TAKEN
+            spent a week in community, authenticated the culture, then posted a single
+            alpha thread that aligned the collection with collector values — not speculation.
+            Four minutes to sellout.
+          </p>
+          <div class="cs-results">
+            <div class="cs-result-item">
+              <div class="cs-result-value">4 min</div>
+              <div class="cs-result-label">Sellout time</div>
+            </div>
+            <div class="cs-result-item">
+              <div class="cs-result-value">780K</div>
+              <div class="cs-result-label">Thread views</div>
+            </div>
+            <div class="cs-result-item">
+              <div class="cs-result-value">6.8×</div>
+              <div class="cs-result-label">Floor increase</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="cs-card section-fade">
+          <div class="cs-number" aria-hidden="true">03</div>
+          <div class="cs-category">L2 Network · Ecosystem Growth</div>
+          <div class="cs-divider" aria-hidden="true"></div>
+          <h3 class="cs-title">Building narrative around a technical product for a non-technical audience</h3>
+          <p class="cs-desc">
+            A Layer 2 network had product-market fit but zero story. TAKEN co-created
+            an educational content series using accessible analogies — turning scalability
+            debates into cultural moments that made non-technical CT feel included.
+          </p>
+          <div class="cs-results">
+            <div class="cs-result-item">
+              <div class="cs-result-value">12K</div>
+              <div class="cs-result-label">New wallets</div>
+            </div>
+            <div class="cs-result-item">
+              <div class="cs-result-value">8 wks</div>
+              <div class="cs-result-label">Campaign</div>
+            </div>
+            <div class="cs-result-item">
+              <div class="cs-result-value">4.2%</div>
+              <div class="cs-result-label">Avg CTR</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="cs-card section-fade" style="background: linear-gradient(135deg, var(--navy) 0%, rgba(13,27,53,.95) 100%);">
+          <div class="cs-number" aria-hidden="true">✦</div>
+          <div class="cs-category">Your Project · Next Campaign</div>
+          <div class="cs-divider" style="background: linear-gradient(90deg, var(--magenta), transparent);" aria-hidden="true"></div>
+          <h3 class="cs-title" style="color: var(--white-dim);">
+            What signal will you send next?
+          </h3>
+          <p class="cs-desc">
+            TAKEN only partners with projects he believes in. If you're building something
+            real in Web3 and you need a voice that the community trusts — this is where
+            it starts.
+          </p>
+          <div style="margin-top: 32px;">
+            <a href="https://x.com/T_A_K_E_N_1" target="_blank" rel="noopener" class="btn-primary">
+              Start the Conversation
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 8: SUMMIT CTA — THE SUMMIT (Video 3)
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="summit" class="cinematic-section" aria-labelledby="summit-heading">
+    <!-- Scene 3: Summit — lazy loaded, paused until visible -->
+    <video class="video-bg" muted loop playsinline preload="none"
+      data-lazy-video
+      aria-hidden="true">
+      <source src="assets/videos/scene3-summit.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay" aria-hidden="true"></div>
+    <div class="holo-scan" aria-hidden="true"></div>
+
+    <div class="section-ui">
+      <div class="summit-ui">
+        <div class="summit-eyebrow section-fade">Scene III — The Summit</div>
+        <h2 class="summit-headline section-fade" id="summit-heading">
+          The signal<br>
+          <em>reaches</em><br>
+          the summit
+        </h2>
+        <p class="summit-desc section-fade">
+          This is where the explorer plants the flag. Where the community looks up
+          and sees the aurora — and knows what it means. TAKEN is ready for what's next.
+          Are you?
+        </p>
+        <div class="summit-actions section-fade">
+          <a href="https://x.com/T_A_K_E_N_1" target="_blank" rel="noopener" class="btn-primary">
+            Follow on X — @T_A_K_E_N_1
+          </a>
+          <a href="mailto:contact@taken.xyz" class="btn-ghost">
+            Partner With TAKEN
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════════ -->
+  <footer id="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">T<span>A</span>KEN</div>
+        <div class="footer-tagline">Web3 Signal Architect · The Penguin Explorer</div>
+      </div>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="https://x.com/T_A_K_E_N_1" target="_blank" rel="noopener">X / Twitter</a>
+        <a href="#dashboard">Signal Dashboard</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#brand-ecosystem">Partnerships</a>
+      </nav>
+      <div class="footer-copy">
+        © 2025 TAKEN · All signals reserved · Built on the frozen frontier
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════════════════ -->
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
