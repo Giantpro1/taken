@@ -161,64 +161,111 @@
         </a>
      7. Duplicate the full set inside each .marquee-row for infinite scroll
 -->
-  <div class="threads-outer" id="threads">
-    <div class="threads-head">
-      <div>
-        <div class="sec-lbl">Top Threads</div>
-        <div class="sec-h" style="margin-bottom:0">Narratives that move the market.</div>
-      </div>
-      <div class="threads-note">Scroll to explore ↓</div>
+<div class="threads-outer" id="threads">
+  <div class="threads-head">
+    <div>
+      <div class="sec-lbl">Top Threads</div>
+      <div class="sec-h" style="margin-bottom:0">Narratives that move the market.</div>
+    </div>
+    <div class="threads-note">Scroll to explore ↓</div>
+  </div>
+
+  <div class="marquee-wrap">
+
+    <!-- ROW 1 — forward. Cards duplicated inline for seamless loop -->
+    <div class="marquee-row fwd" id="row1">
+      <!-- ORIGINAL SET -->
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/111" target="_blank">
+        <img src="assets/img/tweets/tweet1.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/222" target="_blank">
+        <img src="assets/img/tweets/tweet2.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/333" target="_blank">
+        <img src="assets/img/tweets/tweet3.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/444" target="_blank">
+        <img src="assets/img/tweets/tweet4.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/555" target="_blank">
+        <img src="assets/img/tweets/tweet5.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <!-- DUPLICATE SET — exact copy, makes the loop seamless -->
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/111" target="_blank">
+        <img src="assets/img/tweets/tweet1.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/222" target="_blank">
+        <img src="assets/img/tweets/tweet2.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/333" target="_blank">
+        <img src="assets/img/tweets/tweet3.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/444" target="_blank">
+        <img src="assets/img/tweets/tweet4.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/555" target="_blank">
+        <img src="assets/img/tweets/tweet5.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
     </div>
 
-    <div class="marquee-wrap">
-      <!-- ROW 1 — scrolls forward -->
-      <div class="marquee-row fwd" id="row1">
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/111" target="_blank">
-          <img src="assets/img/tweets/tweet1.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/222" target="_blank">
-          <img src="assets/img/tweets/tweet2.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/333" target="_blank">
-          <img src="assets/img/tweets/tweet3.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/444" target="_blank">
-          <img src="assets/img/tweets/tweet4.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/555" target="_blank">
-          <img src="assets/img/tweets/tweet5.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-      </div>
-      <!-- ROW 2 — scrolls in reverse -->
-      <div class="marquee-row rev" id="row2">
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/111" target="_blank">
-          <img src="assets/img/tweets/tweet6.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/222" target="_blank">
-          <img src="assets/img/tweets/tweet2.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/333" target="_blank">
-          <img src="assets/img/tweets/tweet3.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/444" target="_blank">
-          <img src="assets/img/tweets/tweet4.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-        <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/555" target="_blank">
-          <img src="assets/img/tweets/tweet5.jpg" alt="tweet">
-          <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
-        </a>
-      </div>
+    <!-- ROW 2 — reverse. Same pattern -->
+    <div class="marquee-row rev" id="row2">
+      <!-- ORIGINAL SET -->
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/111" target="_blank">
+        <img src="assets/img/tweets/tweet6.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/222" target="_blank">
+        <img src="assets/img/tweets/tweet2.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/333" target="_blank">
+        <img src="assets/img/tweets/tweet3.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/444" target="_blank">
+        <img src="assets/img/tweets/tweet4.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/555" target="_blank">
+        <img src="assets/img/tweets/tweet5.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <!-- DUPLICATE SET -->
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/111" target="_blank">
+        <img src="assets/img/tweets/tweet6.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/222" target="_blank">
+        <img src="assets/img/tweets/tweet2.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/333" target="_blank">
+        <img src="assets/img/tweets/tweet3.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/444" target="_blank">
+        <img src="assets/img/tweets/tweet4.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
+      <a class="tw-shot" href="https://x.com/T_A_K_E_N_1/status/555" target="_blank">
+        <img src="assets/img/tweets/tweet5.jpg" alt="tweet">
+        <div class="tw-shot-overlay"><span class="tw-shot-link">View on 𝕏 →</span></div>
+      </a>
     </div>
+
   </div>
+</div>
 
   <div class="rule"></div>
 

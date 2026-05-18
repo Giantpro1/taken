@@ -96,7 +96,7 @@ nav.stuck{background:rgba(9,12,17,0.92);backdrop-filter:blur(24px);border-color:
 .marquee-row{display:flex;gap:14px;width:max-content}
 .marquee-row.fwd{animation:mfwd 35s linear infinite}
 .marquee-row.rev{animation:mrev 40s linear infinite}
-.marquee-row:hover{animation-play-state:paused}
+.marquee-row.paused { animation-play-state: paused; }
 @keyframes mfwd{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes mrev{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
 
